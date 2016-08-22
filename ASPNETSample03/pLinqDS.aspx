@@ -10,10 +10,13 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="ASPNETSample03.SampleDataContext" 
-            EnableDelete="True" EnableInsert="True" EnableUpdate="True" EntityTypeName="" TableName="Pessoas" Where="nome == @nome">
+        <asp:LinqDataSource ID="LinqDataSource1" runat="server" 
+            ContextTypeName="ASPNETSample03.SampleDataContext" 
+            EnableDelete="True" EnableInsert="True" EnableUpdate="True" 
+            EntityTypeName="" TableName="Pessoas">
             <WhereParameters>
-                <asp:ControlParameter ControlID="txtSearch" Name="nome" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtSearch" Name="nome" PropertyName="Text" 
+                    Type="String" />
             </WhereParameters>
         </asp:LinqDataSource>
         <br />
@@ -21,7 +24,7 @@
         <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="OK" />
     
         <br />
-        <asp:ListView ID="ListView1" runat="server" DataKeyNames="idPessoa" DataSourceID="LinqDataSource1" GroupItemCount="3" InsertItemPosition="LastItem">
+        <asp:ListView ID="ListView1" runat="server" DataKeyNames="idPessoa" DataSourceID="LinqDataSource1" GroupItemCount="3">
             <AlternatingItemTemplate>
                 <td runat="server" style="background-color:#FFF8DC;">idPessoa:
                     <asp:Label ID="idPessoaLabel" runat="server" Text='<%# Eval("idPessoa") %>' />
@@ -34,10 +37,6 @@
                     <br />
                     obs:
                     <asp:Label ID="obsLabel" runat="server" Text='<%# Eval("obs") %>' />
-                    <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <br />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                     <br />
                 </td>
             </AlternatingItemTemplate>
@@ -104,10 +103,6 @@
                     obs:
                     <asp:Label ID="obsLabel" runat="server" Text='<%# Eval("obs") %>' />
                     <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <br />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
-                    <br />
                 </td>
             </ItemTemplate>
             <LayoutTemplate>
@@ -137,10 +132,6 @@
                     <br />
                     obs:
                     <asp:Label ID="obsLabel" runat="server" Text='<%# Eval("obs") %>' />
-                    <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
-                    <br />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                     <br />
                 </td>
             </SelectedItemTemplate>
