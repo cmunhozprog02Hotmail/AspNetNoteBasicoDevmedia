@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="sampledb" Class="SampleDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=CHRIS-NOTE-PC;Initial Catalog=sampledb;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="sampledbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Pessoas" Member="Pessoas">
+    <Type Name="Pessoa">
+      <Column Name="idPessoa" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nome" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="telefone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="obs" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cidades" Member="Cidades">
+    <Type Name="Cidade">
+      <Column Name="idCidade" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descricao" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
+      <Column Name="sigla" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
