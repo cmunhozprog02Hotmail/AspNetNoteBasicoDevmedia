@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+        <asp:TextBox runat="server" ID="txtSearch"></asp:TextBox>
+        <asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click"/>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ODS01">
             <Columns>
                 <asp:BoundField DataField="idPessoa" HeaderText="idPessoa" SortExpression="idPessoa" />
@@ -18,7 +19,12 @@
                 <asp:BoundField DataField="obs" HeaderText="obs" SortExpression="obs" />
             </Columns>
         </asp:GridView>
-        <asp:ObjectDataSource ID="ODS01" runat="server" SelectMethod="GetPessoas" TypeName="ASPNETSample03.SampleContext"></asp:ObjectDataSource>
+        <asp:ObjectDataSource ID="ODS01" runat="server" SelectMethod="GetPessoas" 
+            TypeName="ASPNETSample03.SampleContext">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtSearch" Type="String" Name="Search" PropertyName="Text" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
     
     </div>
     </form>

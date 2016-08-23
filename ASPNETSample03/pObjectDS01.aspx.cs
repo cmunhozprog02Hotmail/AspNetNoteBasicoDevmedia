@@ -13,5 +13,10 @@ namespace ASPNETSample03
         {
 
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            ODS01.DataBind();
+        }
     }
 }
