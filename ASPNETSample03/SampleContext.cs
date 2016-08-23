@@ -17,8 +17,8 @@ namespace ASPNETSample03
         public IQueryable<Pessoa> GetPessoas(string search)
         {
             IQueryable<Pessoa> iqPessoa = GetPessoas().AsQueryable<Pessoa>();
-            if(search == null)
-                iqPessoa = iqPessoa.Where(p => p.nome.Contains(search));
+            if(search != null)
+                iqPessoa = iqPessoa.Where(q => q.nome.Contains(search));
             return iqPessoa;
         }
         public void AddPessoa(Pessoa p)
