@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNETSample03", "ASPNETSample03\ASPNETSample03.csproj", "{884F8F20-A7D1-4207-95E7-0E896A4AB6BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNETSample03Entity", "ASPNETSample03Entity\ASPNETSample03Entity.csproj", "{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{884F8F20-A7D1-4207-95E7-0E896A4AB6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{884F8F20-A7D1-4207-95E7-0E896A4AB6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{884F8F20-A7D1-4207-95E7-0E896A4AB6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

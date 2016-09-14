@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{884F8F20-A7D1-4207-95E7-0E896A4AB6BE}</ProjectGuid>
+    <ProjectGuid>{6946652C-F0AF-4F8C-BE99-3E59AF2A230B}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ASPNETSample03</RootNamespace>
-    <AssemblyName>ASPNETSample03</AssemblyName>
+    <RootNamespace>ASPNETSample03Entity</RootNamespace>
+    <AssemblyName>ASPNETSample03Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -38,16 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,40 +64,59 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="pLinqDS.aspx" />
-    <Content Include="pObjectDS01.aspx" />
+    <Content Include="SampleData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleData.edmx</DependentUpon>
+      <LastGenOutput>SampleData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SampleData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleData.edmx</DependentUpon>
+      <LastGenOutput>SampleData.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pLinqDS.aspx.cs">
-      <DependentUpon>pLinqDS.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="Cidades.cs">
+      <DependentUpon>SampleData.tt</DependentUpon>
     </Compile>
-    <Compile Include="pLinqDS.aspx.designer.cs">
-      <DependentUpon>pLinqDS.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="pObjectDS01.aspx.cs">
-      <DependentUpon>pObjectDS01.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="pObjectDS01.aspx.designer.cs">
-      <DependentUpon>pObjectDS01.aspx</DependentUpon>
+    <Compile Include="Pessoas.cs">
+      <DependentUpon>SampleData.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sample.designer.cs">
+    <Compile Include="SampleData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Sample.dbml</DependentUpon>
+      <DependentUpon>SampleData.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SampleContext.cs" />
+    <Compile Include="SampleData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sample.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Sample.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="packages.config" />
+    <EntityDeploy Include="SampleData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SampleData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="SampleData.edmx.diagram">
+      <DependentUpon>SampleData.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -108,12 +125,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Sample.dbml.layout">
-      <DependentUpon>Sample.dbml</DependentUpon>
-    </None>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -128,9 +140,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1629</DevelopmentServerPort>
+          <DevelopmentServerPort>1100</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1629/</IISUrl>
+          <IISUrl>http://localhost:1100/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
