@@ -13,5 +13,10 @@ namespace ASPNETSample03Entity
         {
 
         }
+
+        protected void FormView1_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+            GridView1.DataBind();
+        }
     }
 }
