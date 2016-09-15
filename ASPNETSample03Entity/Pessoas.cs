@@ -18,5 +18,8 @@ namespace ASPNETSample03Entity
         public string nome { get; set; }
         public string telefone { get; set; }
         public string obs { get; set; }
+        public Nullable<int> idCidade { get; set; }
+    
+        public virtual Cidades Cidades { get; set; }
     }
 }

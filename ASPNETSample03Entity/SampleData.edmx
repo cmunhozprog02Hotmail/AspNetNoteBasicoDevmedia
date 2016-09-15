@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sample001Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="sample001Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cidades">
           <Key>
             <PropertyRef Name="idCidade" />
@@ -21,13 +21,52 @@
           <Property Name="nome" Type="nvarchar" MaxLength="100" />
           <Property Name="telefone" Type="nvarchar" MaxLength="20" />
           <Property Name="obs" Type="nvarchar" MaxLength="500" />
+          <Property Name="idCidade" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'sampledb.dbo.vwPessoas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwPessoas">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="int" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="100" />
+          <Property Name="telefone" Type="nvarchar" MaxLength="20" />
+          <Property Name="obs" Type="nvarchar" MaxLength="500" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="350" />
+          <Property Name="sigla" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Pessoas_Cidades">
+          <End Role="Cidades" Type="Self.Cidades" Multiplicity="0..1" />
+          <End Role="Pessoas" Type="Self.Pessoas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="idCidade" />
+            </Principal>
+            <Dependent Role="Pessoas">
+              <PropertyRef Name="idCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="sample001ModelStoreContainer">
           <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pessoas" EntityType="Self.Pessoas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwPessoas" EntityType="Self.vwPessoas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwPessoas].[idPessoa] AS [idPessoa], 
+[vwPessoas].[nome] AS [nome], 
+[vwPessoas].[telefone] AS [telefone], 
+[vwPessoas].[obs] AS [obs], 
+[vwPessoas].[descricao] AS [descricao], 
+[vwPessoas].[sigla] AS [sigla]
+FROM [dbo].[vwPessoas] AS [vwPessoas]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Pessoas_Cidades" Association="Self.FK_Pessoas_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Pessoas" EntitySet="Pessoas" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sample001Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -38,6 +77,7 @@
           <Property Name="idCidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="sigla" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Pessoas" Relationship="sample001Model.FK_Pessoas_Cidades" FromRole="Cidades" ToRole="Pessoas" />
         </EntityType>
         <EntityType Name="Pessoas">
           <Key>
@@ -47,11 +87,41 @@
           <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="obs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="idCidade" Type="Int32" />
+          <NavigationProperty Name="Cidades" Relationship="sample001Model.FK_Pessoas_Cidades" FromRole="Pessoas" ToRole="Cidades" />
         </EntityType>
         <EntityContainer Name="Sample001Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cidades" EntityType="Self.Cidades" />
           <EntitySet Name="Pessoas" EntityType="Self.Pessoas" />
+          <AssociationSet Name="FK_Pessoas_Cidades" Association="sample001Model.FK_Pessoas_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Pessoas" EntitySet="Pessoas" />
+          </AssociationSet>
+          <EntitySet Name="vwPessoas" EntityType="sample001Model.vwPessoas" />
         </EntityContainer>
+        <Association Name="FK_Pessoas_Cidades">
+          <End Type="sample001Model.Cidades" Role="Cidades" Multiplicity="0..1" />
+          <End Type="sample001Model.Pessoas" Role="Pessoas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="idCidade" />
+            </Principal>
+            <Dependent Role="Pessoas">
+              <PropertyRef Name="idCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwPessoas">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="obs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="sigla" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -70,10 +140,23 @@
           <EntitySetMapping Name="Pessoas">
             <EntityTypeMapping TypeName="sample001Model.Pessoas">
               <MappingFragment StoreEntitySet="Pessoas">
+                <ScalarProperty Name="idCidade" ColumnName="idCidade" />
                 <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="telefone" ColumnName="telefone" />
                 <ScalarProperty Name="obs" ColumnName="obs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPessoas">
+            <EntityTypeMapping TypeName="sample001Model.vwPessoas">
+              <MappingFragment StoreEntitySet="vwPessoas">
+                <ScalarProperty Name="sigla" ColumnName="sigla" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="obs" ColumnName="obs" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

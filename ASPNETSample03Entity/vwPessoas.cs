@@ -12,17 +12,13 @@ namespace ASPNETSample03Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Cidades
+    public partial class vwPessoas
     {
-        public Cidades()
-        {
-            this.Pessoas = new HashSet<Pessoas>();
-        }
-    
-        public int idCidade { get; set; }
+        public int idPessoa { get; set; }
+        public string nome { get; set; }
+        public string telefone { get; set; }
+        public string obs { get; set; }
         public string descricao { get; set; }
         public string sigla { get; set; }
-    
-        public virtual ICollection<Pessoas> Pessoas { get; set; }
     }
 }

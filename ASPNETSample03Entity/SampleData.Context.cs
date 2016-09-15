@@ -27,5 +27,6 @@ namespace ASPNETSample03Entity
     
         public DbSet<Cidades> Cidades { get; set; }
         public DbSet<Pessoas> Pessoas { get; set; }
+        public DbSet<vwPessoas> vwPessoas { get; set; }
     }
 }
