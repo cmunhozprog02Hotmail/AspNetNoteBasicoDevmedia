@@ -10,7 +10,7 @@
 namespace ASPNETSample03Entity {
     
     
-    public partial class WebForm2 {
+    public partial class pPessoas {
         
         /// <summary>
         /// form1 control.
@@ -22,6 +22,24 @@ namespace ASPNETSample03Entity {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// txtSearc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearc;
+        
+        /// <summary>
+        /// btnSearc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearc;
+        
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -29,15 +47,6 @@ namespace ASPNETSample03Entity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// EntityDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource EntityDataSource1;
         
         /// <summary>
         /// FormView1 control.
@@ -49,12 +58,12 @@ namespace ASPNETSample03Entity {
         protected global::System.Web.UI.WebControls.FormView FormView1;
         
         /// <summary>
-        /// EntityDataSource2 control.
+        /// EntityDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource EntityDataSource2;
+        protected global::System.Web.UI.WebControls.EntityDataSource EntityDataSource1;
     }
 }

@@ -10,16 +10,27 @@
     <form id="form1" runat="server">
     <div>
 
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="idCidade" DataSourceID="EntityDataSource1" ForeColor="#333333" GridLines="None" PageSize="5" Width="403px">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
+            AutoGenerateColumns="False" CellPadding="4" DataKeyNames="idCidade" 
+            DataSourceID="EntityDataSource1" ForeColor="#333333" GridLines="None" 
+            PageSize="5" Width="403px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="descricao" HeaderText="descricao" SortExpression="descricao" />
                 <asp:BoundField DataField="sigla" HeaderText="sigla" SortExpression="sigla" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="Del" runat="server" CausesValidation="False" CommandName="Delete" Text="x" />
+                        <asp:LinkButton ID="Del" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Excluir" />
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="Sel" runat="server" CausesValidation="False" 
+                            CommandName="Delete" Text="Excluir" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField ButtonType="Link" SelectText="Edit" ShowSelectButton="true"/>
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -33,8 +44,16 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
     
+        <asp:EntityDataSource ID="EntityDataSource1" runat="server" 
+            ConnectionString="name=Sample001Entities" DefaultContainerName="Sample001Entities" 
+            EnableDelete="True" EnableFlattening="False" 
+            EnableInsert="True" 
+            EnableUpdate="True" EntitySetName="Cidades">
+        </asp:EntityDataSource>
+
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="idCidade" 
-            DataSourceID="EntityDataSource1" DefaultMode="Insert" OnItemInserted="FormView1_ItemInserted">
+            DataSourceID="EntityDataSource2" DefaultMode="Insert" 
+            OnItemInserted="FormView1_ItemInserted" OnItemUpdated="FormView1_ItemUpdated">
             <EditItemTemplate>
                 idCidade:
                 <asp:Label ID="idCidadeLabel1" runat="server" Text='<%# Eval("idCidade") %>' />
@@ -73,11 +92,18 @@
                 &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
             </ItemTemplate>
         </asp:FormView>
-        <asp:EntityDataSource ID="EntityDataSource1" runat="server" 
+        <!-- Data Source 01 -->
+        <br />
+
+         <asp:EntityDataSource ID="EntityDataSource2" runat="server" 
             ConnectionString="name=Sample001Entities" DefaultContainerName="Sample001Entities" 
             EnableDelete="True" EnableFlattening="False" 
             EnableInsert="True" 
-            EnableUpdate="True" EntitySetName="Cidades">
+            EnableUpdate="True" EntitySetName="Cidades"
+            Where="it.idCidade = @idcidade">
+             <WhereParameters>
+                 <asp:ControlParameter ControlID="GridView1" Name="idCidade" PropertyName="SelectedValue"  Type="Int32"/>
+             </WhereParameters>
         </asp:EntityDataSource>
     
     </div>

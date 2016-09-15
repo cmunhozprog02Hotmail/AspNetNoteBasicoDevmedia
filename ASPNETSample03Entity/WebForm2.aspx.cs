@@ -18,5 +18,15 @@ namespace ASPNETSample03Entity
         {
             GridView1.DataBind();
         }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FormView1.ChangeMode(FormViewMode.Edit);
+        }
+
+        protected void FormView1_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+        {
+            GridView1.DataBind();
+        }
     }
 }
